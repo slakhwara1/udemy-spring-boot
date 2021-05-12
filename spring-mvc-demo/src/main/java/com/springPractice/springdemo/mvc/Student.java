@@ -5,9 +5,29 @@ public class Student {
 	private String firstName;
 	private String lastName;
 	private String country;
+	private String favouriteLanguage;
+	private String operatingSystems;
 
 	public Student() {
 		
+	}
+	
+	
+
+	public String getOperatingSystems() {
+		return operatingSystems;
+	}
+
+	public void setOperatingSystems(String operatingSystems) {
+		this.operatingSystems = operatingSystems;
+	}
+
+	public String getFavouriteLanguage() {
+		return favouriteLanguage;
+	}
+
+	public void setFavouriteLanguage(String favouriteLanguage) {
+		this.favouriteLanguage = favouriteLanguage;
 	}
 
 	public String getCountry() {

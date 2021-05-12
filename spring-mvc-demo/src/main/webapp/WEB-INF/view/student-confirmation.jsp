@@ -12,6 +12,14 @@
 
 	<br>
 	<br> Country: ${ student.country }
+	
+	<br>
+	<br> Favourite Language: ${ student.favouriteLanguage }
+	
+	<br>
+	<br> Operating System: ${ student.operatingSystems }
+	
+	
 
 </body>
 

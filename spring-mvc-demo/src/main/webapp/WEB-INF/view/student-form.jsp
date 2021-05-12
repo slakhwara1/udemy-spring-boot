@@ -29,6 +29,23 @@
 
 		</form:select>
 
+		<br>
+		<br>
+	
+	Favourite Language: 
+	
+	<form:radiobuttons path="favouriteLanguage" items="${ favouriteLanguageOptions }"/>
+	
+		<br>
+		<br>
+	
+	OS experience:
+	
+	<form:checkboxes path="operatingSystems" items="${ operatingSystemOptions }"/>
+	
+		<br>
+		<br>	
+	
 		<input type="submit" value="Submit">
 
 	</form:form>
