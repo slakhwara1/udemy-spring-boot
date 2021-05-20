@@ -1,6 +1,9 @@
 package com.springPractice.aopdemo.aspect;
 
+import java.util.List;
+
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -13,6 +16,29 @@ import com.springPractice.aopdemo.Account;
 @Component
 @Order(2)
 public class MyDemoLoggingAspect {
+
+	@AfterReturning(
+			pointcut = "execution(* com.springPractice.aopdemo.dao.AccountDAO.findAccounts(..))",
+			returning = "result")
+	public void afterReturningFindAccountsAdvice(JoinPoint joinPoint, List<Account> result) {
+		
+		String method = joinPoint.getSignature().toShortString();
+		
+		System.out.println("\n=====>>>>> Executing @AfterReturning on method : " + method);
+		
+		System.out.println("\n=====>>>>> Executing @AfterReturning on method : " + result);
+
+		convertAccountNamesToUpperCase(result);
+
+	}
+	
+
+	private void convertAccountNamesToUpperCase(List<Account> result) {
+		
+		result.forEach(account -> account.setName(account.getName().toUpperCase()));
+		
+	}
+
 
 	@Before("com.springPractice.aopdemo.aspect.SpringAppAopExpressions.forDaoPackageNoGetterAndSetter()")
 	public void beforeAddAccount(JoinPoint joinPoint) {
