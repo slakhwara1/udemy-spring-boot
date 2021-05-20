@@ -14,16 +14,16 @@ public class AfterFinallyDemoApp {
 
 		AccountDAO theAccountDAO = context.getBean("accountDAO", AccountDAO.class);
 
-		List<Account> accountList = null;		
-		
+		List<Account> accountList = null;
+
 		try {
-			boolean tripWire = true;
-			 accountList = theAccountDAO.findAccounts(tripWire);			
-			
+			boolean tripWire = false;
+			accountList = theAccountDAO.findAccounts(tripWire);
+
 		} catch (Exception e) {
 			System.out.println("\n\n Main Program ... caught exception " + e);
 		}
-		
+
 		System.out.println("\n\n Main Program: AfterThrowingDemoApp : ");
 		System.out.println(accountList + "\n");
 
