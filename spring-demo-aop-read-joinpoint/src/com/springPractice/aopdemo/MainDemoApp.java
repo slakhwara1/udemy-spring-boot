@@ -15,11 +15,14 @@ public class MainDemoApp {
 
 		MembershipDAO theMembershipDAO = context.getBean("membershipDAO", MembershipDAO.class);
 
-		theAccountDAO.addAccount(new Account(), true);
+		Account myAccount = new Account();
+		myAccount.setName("Madhu");
+		myAccount.setLevel("platinum");
+		theAccountDAO.addAccount(myAccount, true);
 		theAccountDAO.doWork();
 		theAccountDAO.setName("fooBar");
 		theAccountDAO.setServiceCode("silver");
-		
+
 		String name = theAccountDAO.getName();
 		String code = theAccountDAO.getServiceCode();
 
