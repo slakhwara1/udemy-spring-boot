@@ -1,6 +1,7 @@
 package com.springPractice.aopdemo.aspect;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -20,13 +21,14 @@ import com.springPractice.aopdemo.Account;
 @Component
 @Order(2)
 public class MyDemoLoggingAspect {
-	
+
+	private Logger myLogger = Logger.getLogger(getClass().getName());
 	
 	@Around("execution(* com.springPractice.aopdemo.service.*.getFortune(..))")
 	public Object aroundGetFortune(ProceedingJoinPoint proceedingJoinPoint) {
 		
 		String method = proceedingJoinPoint.getSignature().toShortString();
-		System.out.println("\n=====>>>>> Executing @Around on method : " + method);
+		myLogger.info("\n=====>>>>> Executing @Around on method : " + method);
 		
 		long begin = System.currentTimeMillis();
 		
@@ -41,7 +43,7 @@ public class MyDemoLoggingAspect {
 		
 		long duratin = end - begin;
 		
-		System.out.println("\n =====>>>>> Duration : " + duratin/1000.0 + " seconds");
+		myLogger.info("\n =====>>>>> Duration : " + duratin/1000.0 + " seconds");
 		
 		return result;
 	}
@@ -52,7 +54,7 @@ public class MyDemoLoggingAspect {
 		
 		String method = joinPoint.getSignature().toShortString();
 		
-		System.out.println("\n=====>>>>> Executing @After (Finally) on method : " + method);
+		myLogger.info("\n=====>>>>> Executing @After (Finally) on method : " + method);
 				
 	}
 	
@@ -64,9 +66,9 @@ public class MyDemoLoggingAspect {
 		
 		String method = joinPoint.getSignature().toShortString();
 		
-		System.out.println("\n=====>>>>> Executing @AfterThrowing on method : " + method);
+		myLogger.info("\n=====>>>>> Executing @AfterThrowing on method : " + method);
 		
-		System.out.println("\n=====>>>>> The exception is : " + exc);		
+		myLogger.info("\n=====>>>>> The exception is : " + exc);		
 		
 	}
 	
@@ -78,9 +80,9 @@ public class MyDemoLoggingAspect {
 		
 		String method = joinPoint.getSignature().toShortString();
 		
-		System.out.println("\n=====>>>>> Executing @AfterReturning on method : " + method);
+		myLogger.info("\n=====>>>>> Executing @AfterReturning on method : " + method);
 		
-		System.out.println("\n=====>>>>> Executing @AfterReturning on method : " + result);
+		myLogger.info("\n=====>>>>> Executing @AfterReturning on method : " + result);
 
 		convertAccountNamesToUpperCase(result);
 
@@ -97,20 +99,20 @@ public class MyDemoLoggingAspect {
 	@Before("com.springPractice.aopdemo.aspect.SpringAppAopExpressions.forDaoPackageNoGetterAndSetter()")
 	public void beforeAddAccount(JoinPoint joinPoint) {
 
-		System.out.println("\n\n ===>>>>>>> Ecxecuting @Before advice on ");
+		myLogger.info("\n\n ===>>>>>>> Ecxecuting @Before advice on ");
 		MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
 
-		System.out.println("Method: " + methodSignature);
+		myLogger.info("Method: " + methodSignature);
 
 		Object[] args = joinPoint.getArgs();
 
 		for (Object tempArg : args) {
-			System.out.println(tempArg);
+			myLogger.info(tempArg.toString());
 
 			if (tempArg instanceof Account) {
 				Account account = (Account) tempArg;
-				System.out.println("Account name : " + account.getName());
-				System.out.println("Account level : " + account.getLevel());
+				myLogger.info("Account name : " + account.getName());
+				myLogger.info("Account level : " + account.getLevel());
 			}
 		}
 
