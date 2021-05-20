@@ -21,7 +21,8 @@ public class AroundHandleExceptionDemoApp {
 
 		myLogger.info("Calling Fortune");
 
-		String data = theTrafficFortuneService.getFortune();
+		boolean tripWire = true;
+		String data = theTrafficFortuneService.getFortune(tripWire);
 
 		myLogger.info("My Fortune is : " + data);
 

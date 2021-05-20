@@ -19,4 +19,13 @@ public class TrafficFortuneService {
 
 	}
 
+	public String getFortune(boolean tripWire) {
+
+		if (tripWire) {
+			throw new RuntimeException("Major Accident! Highway is closed");
+		}
+
+		return this.getFortune();
+	}
+
 }

@@ -25,7 +25,7 @@ public class MyDemoLoggingAspect {
 	private Logger myLogger = Logger.getLogger(getClass().getName());
 	
 	@Around("execution(* com.springPractice.aopdemo.service.*.getFortune(..))")
-	public Object aroundGetFortune(ProceedingJoinPoint proceedingJoinPoint) {
+	public Object aroundGetFortune(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 		
 		String method = proceedingJoinPoint.getSignature().toShortString();
 		myLogger.info("\n=====>>>>> Executing @Around on method : " + method);
@@ -36,7 +36,14 @@ public class MyDemoLoggingAspect {
 		try {
 			result = proceedingJoinPoint.proceed();
 		} catch (Throwable e) {
-			e.printStackTrace();
+			
+			myLogger.warning(e.getMessage());
+
+//			FOR SWALLOWING THE EXCEPTION
+//			result = "Major Accident! But no worries, " + "your private AOP helicopter is on the way";
+			
+			throw e;
+			
 		}
 		
 		long end = System.currentTimeMillis();
