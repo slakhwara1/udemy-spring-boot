@@ -6,7 +6,7 @@
 	
 	<body>
 		
-		<h2> Company Home page </h2>
+		<h2> Company Home page Yooo</h2>
 		<hr>
 		
 		Welcome to the company home page
