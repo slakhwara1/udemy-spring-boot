@@ -68,4 +68,14 @@ public class EmployeeController {
 		return "redirect:/employees/list";
 	}
 	
+	@GetMapping("/search")
+	public String delete(@RequestParam("employeeName") String employeeName, Model model) {
+		
+		List<Employee> employees = this.employeeService.searchBy(employeeName);
+		
+		model.addAttribute("employees", employees);
+		
+		return "employees/list-employees";
+	}
+	
 }

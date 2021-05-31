@@ -48,4 +48,19 @@ public class EmployeeServiceImpl implements EmployeeService {
 		this.employeeRepository.deleteById(id);
 	}
 
+	@Override
+	public List<Employee> searchBy(String employeeName) {
+
+		List<Employee> results = null;
+
+		if (employeeName != null && (employeeName.trim().length() > 0)) {
+			results = this.employeeRepository.findByFirstNameOrLastNameContainsAllIgnoreCase(employeeName,
+					employeeName);
+		} else {
+			results = this.findAll();
+		}
+
+		return results;
+	}
+
 }
